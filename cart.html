@@ -1,23 +1,9 @@
 <header>
     <title>Grocer-Ease</title>
+    <link rel="stylesheet" href="style.css">
 </header>
 <style>
-    body {
-        background: #FEF7EC;
-    }
-    .itemBox{
-        background: white;
-        width: 50%;
-        height: 22%;
-        margin:0 auto;
-        border-radius: 25px;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        padding: 15px;
-        line-height: 30px;
-    }
-    p{
-        margin: 0px;
-    }
+    
     #checkout, #priceLabel{
         text-align: right;
         padding-right: 30%;
@@ -26,12 +12,18 @@
     }
 </style>
 <body>
-    <!-- navbar goes here w/ line underneath -->
+    <div class="header">
+        <h1 class="logo"><a href="index.html">HOME</a></h1>
+        <div class="nav-bar">
+                <div><a href="catalog.html">Catalog</a></div>
+                <div><a href="cart.html">Shopping Cart</a></div>
+        </div>
+    </div>
     <h1>Shopping Cart</h1>
     <div id="priceLabel"><p>Price</p></div>
-    <div class="itemBox">
+    <div class="cardBox">
         <p class="recipeName">Tomato Soup</p>
-        <p class="description">description</p>
+        <p class="ingredients">View Ingredients</p>
     </div>
     <div id="checkout"> <input type="submit" value="Checkout"></div>
    
