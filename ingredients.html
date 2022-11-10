@@ -1,0 +1,60 @@
+<!-- <?php
+    session_start();
+?> -->
+<html>
+    <head>
+        <title>Grocer-Ease - Ingredients</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <script>
+        function fetchIngredients(recipe) {
+            const data = null;
+
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === this.DONE) {
+                    writeIngredients(JSON.parse(this.responseText).hits);
+                }
+            });
+
+            xhr.open("GET", "https://edamam-recipe-search.p.rapidapi.com/search?q=creamy%20tomato%20soup");
+            xhr.setRequestHeader("X-RapidAPI-Key", "d9038fa0e3mshdbe05e8a8172552p1f1fafjsnada1cd09000f");
+
+            xhr.send(data);
+        }
+
+        function writeIngredients (recipeArray) {
+            console.log(recipeArray[0].recipe.ingredients);
+        }
+
+        window.onload= function() {
+            params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+
+            recipe = params.recipe;
+            recipe = recipe.substring(1, recipe.length - 1);
+            fetchIngredients(recipe);
+            document.getElementById("recipe").innerHTML = recipe;
+        }
+    </script>
+    <body>
+        <div class="header">
+            <h1 class="logo"><a href="index.html">HOME</a></h1>
+            <div class="nav-bar">
+                    <div><a href="catalog.html">Catalog</a></div>
+                    <div><a href="cart.html">Shopping Cart</a></div>
+            </div>
+            <hr>
+        </div>
+        <h2 id="recipe"></h2>
+        <div id="ingredients"></div>
+        <!-- <?php
+            // Echo session variables that were set on previous page
+            echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
+            echo "Favorite animal is " . $_SESSION["favanimal"] . ".";
+        ?> -->
+    </body>
+</html>
