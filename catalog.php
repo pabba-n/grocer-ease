@@ -1,6 +1,15 @@
-<!-- <?php
+<?php
     session_start();
-?> -->
+    if (isset($_SESSION["cart"])) {
+        //echo "cart set";
+    } else {
+        //echo "cart not set";
+        $_SESSION["cart"] = array(
+            "Creamy Tomato Soup" => 0,
+             "Mushroom Lasagna" => 0,
+        );
+    }
+?>
 <html>
     <head>
         <title>Grocer-Ease - Catalog</title>
@@ -11,8 +20,8 @@
                 margin-right: 10%;
             }
 
-            .recipe-info {
-                color: #fff;
+            .recipe-info h3 {
+                color: #133965;
             }
 
             .recipe table td:first-child {
@@ -21,14 +30,14 @@
 
             .recipe-info p {
                 padding-left: 20px;
+                color: #585F67;
             }
 
             .recipe {
                 width: 100%;
                 padding: 2% 5% 2% 2%;
                 border-radius: 8px;
-                color: #fff;
-                background-color: #000;
+                background-color: #F3E9D9;
                 border: 0;
                 cursor: pointer;
                 margin: 1em;
@@ -43,16 +52,19 @@
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "sample.jpg", "A delicious tomato soup recipe."),
-                new Recipe("Shepherd&apos;s Pie", "sample.jpg", "A delicious shepherd's pie recipe."),
+                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe."),
+                new Recipe("Mushroom Lasagna", "lasagna.png", "A delicious lasagna recipe."),
             );
 
             function makeRecipe(name, image, description) {
                 var t= "";
-                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.html?recipe=&apos;" 
+                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.php?recipe=&apos;" 
                     + name + "&apos;&quot;;" + "'>" + "<table><tr><td><img src='" + image + "' alt= " + name 
                     + " height='150'></td><td><div class='recipe-info'>" + "<h3>" + name + "</h3><p>" + description 
-                    + "</p></div></td></tr></table></button>"
+                    + "</p></div></td></tr></table></button><br />" 
+                    + "<form method='post'>"
+                    + "<input type='submit' name='" + name + "' class='button' value='Add to Cart' />"
+                    + "</form>"
                 return t;
             }
 
@@ -66,10 +78,22 @@
         </script>
     </head>
     <body>
+        <?php
+            for ($i = 0; $i < count($_POST); $i++) {
+                if (array_keys($_POST)[$i] == "Creamy_Tomato_Soup") {
+                    $_SESSION["cart"]["Creamy Tomato Soup"] += 1;
+                }
+                if (array_keys($_POST)[$i] == "Mushroom_Lasagna") {
+                    $_SESSION["cart"]["Mushroom Lasagna"] += 1;
+                }
+                // echo array_keys($_POST)[$i];
+                // echo "<br />";
+            }
+        ?>
         <div class="header">
             <h1 class="logo"><a href="index.html">HOME</a></h1>
             <div class="nav-bar">
-                    <div><a href="catalog.html">Catalog</a></div>
+                    <div><a href="catalog.php">Catalog</a></div>
                     <div><a href="cart.html">Shopping Cart</a></div>
             </div>
             <hr>
@@ -77,10 +101,9 @@
         <h2>Catalog</h2>
         <div id="wrapper">
         </div>
-        <!-- <?php
-            // Set session variables
-            $_SESSION["favcolor"] = "green";
-            $_SESSION["favanimal"] = "cat";
-        ?> -->
+        <?php 
+            // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
+            // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
+        ?>
     </body>
 </html>

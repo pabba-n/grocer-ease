@@ -1,6 +1,6 @@
-<!-- <?php
+<?php
     session_start();
-?> -->
+?>
 <html>
     <head>
         <title>Grocer-Ease - Ingredients</title>
@@ -9,6 +9,10 @@
     <script>
         function fetchIngredients(recipe) {
             const data = null;
+
+            recipeFormatted = recipe.toLowerCase();
+
+            console.log(recipeFormatted);
 
             const xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -19,7 +23,7 @@
                 }
             });
 
-            xhr.open("GET", "https://edamam-recipe-search.p.rapidapi.com/search?q=creamy%20tomato%20soup");
+            xhr.open("GET", "https://edamam-recipe-search.p.rapidapi.com/search?q=" + recipeFormatted);
             xhr.setRequestHeader("X-RapidAPI-Key", "d9038fa0e3mshdbe05e8a8172552p1f1fafjsnada1cd09000f");
 
             xhr.send(data);
@@ -27,6 +31,12 @@
 
         function writeIngredients (recipeArray) {
             console.log(recipeArray[0].recipe.ingredients);
+            var t = "<ul>";
+            for (i = 0; i < recipeArray[0].recipe.ingredients.length; i++) {
+                t += "<li>" + recipeArray[0].recipe.ingredients[i].text + "</li>";
+            }
+            t += "</ul>";
+            document.getElementById("ingredients").innerHTML = t;
         }
 
         window.onload= function() {
@@ -44,17 +54,16 @@
         <div class="header">
             <h1 class="logo"><a href="index.html">HOME</a></h1>
             <div class="nav-bar">
-                    <div><a href="catalog.html">Catalog</a></div>
+                    <div><a href="catalog.php">Catalog</a></div>
                     <div><a href="cart.html">Shopping Cart</a></div>
             </div>
             <hr>
         </div>
         <h2 id="recipe"></h2>
         <div id="ingredients"></div>
-        <!-- <?php
-            // Echo session variables that were set on previous page
-            echo "Favorite color is " . $_SESSION["favcolor"] . ".<br>";
-            echo "Favorite animal is " . $_SESSION["favanimal"] . ".";
-        ?> -->
+        <?php 
+            // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
+            // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
+        ?>
     </body>
 </html>
