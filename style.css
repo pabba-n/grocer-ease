@@ -55,3 +55,45 @@ button {
 .buttonText {
     color: white;
 }
+
+div.nav-bar {
+        display:flex;
+}
+div.cart {
+        margin-left: 60%;
+}
+a {
+        text-decoration: none;
+}
+div.catalog{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        margin-left:5%;
+        font-size: 16px;
+        position: relative;
+        display: block;
+        color: #133965;
+        text-decoration: none;
+        border: none;
+        padding: 10px 40px;
+        text-transform: uppercase;
+        overflow: hidden;
+}
+.catalog::before{
+        background: #F3E9D9;
+        color: #fff;
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: -1;
+        transition: all 0.3s ease;
+        width: 0%;
+        height: 100%;
+}
+.catalog:hover::before{
+        width: 100%;
+}
+hr {
+        width: 90%;
+}
