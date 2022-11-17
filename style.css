@@ -97,3 +97,6 @@ div.catalog{
 hr {
         width: 90%;
 }
+a, a:visited {
+        color: inherit;
+}
