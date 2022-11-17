@@ -14,6 +14,7 @@
     <head>
         <title>Grocer-Ease - Catalog</title>
         <link rel="stylesheet" href="style.css">
+        <meta name='viewport' content="width=device-width, initial scale=1">
         <style>
             body {
                 margin-left: 10%;
@@ -43,6 +44,14 @@
                 margin: 1em;
                 box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
             }
+
+            .button {
+                float: right;
+                border-radius: 8px;
+                background-color: #133965;
+                color: #fff;
+                padding: 8px;
+            }
         </style>
         <script>
             function Recipe(name, image, description) {
@@ -52,7 +61,7 @@
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe."),
+                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe."),
                 new Recipe("Mushroom Lasagna", "lasagna.png", "A delicious lasagna recipe."),
             );
 
@@ -61,10 +70,11 @@
                 t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.php?recipe=&apos;" 
                     + name + "&apos;&quot;;" + "'>" + "<table><tr><td><img src='" + image + "' alt= " + name 
                     + " height='150'></td><td><div class='recipe-info'>" + "<h3>" + name + "</h3><p>" + description 
-                    + "</p></div></td></tr></table></button><br />" 
+                    + "</p></div></td></tr></table>"
                     + "<form method='post'>"
                     + "<input type='submit' name='" + name + "' class='button' value='Add to Cart' />"
                     + "</form>"
+                    + "</button><br />" 
                 return t;
             }
 
