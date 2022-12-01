@@ -11,6 +11,8 @@
     }
 ?>
 <html>
+    <!-- lasagna $9.75
+    tomato soup $9.50 -->
     <head>
         <title>Grocer-Ease - Catalog</title>
         <link rel="stylesheet" href="style.css">
@@ -52,23 +54,32 @@
                 color: #fff;
                 padding: 8px;
             }
+            
+            .price {
+                /* float: right; */
+                text-align: right;
+                color: #133965;
+                font-size: 25px;
+                /* margin-bottom: 5px; */
+            }
         </style>
         <script>
-            function Recipe(name, image, description) {
+            function Recipe(name, image, description, price) {
                 this.name = name;
                 this.image = image;
                 this.description = description;
+                this.price = price
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe."),
-                new Recipe("Mushroom Lasagna", "lasagna.png", "A delicious lasagna recipe."),
+                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
+                new Recipe("Mushroom Lasagna", "lasagna.png", "A delicious lasagna recipe.", "$9.75"),
             );
 
-            function makeRecipe(name, image, description) {
+            function makeRecipe(name, image, description, price) {
                 var t= "";
                 t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.php?recipe=&apos;" 
-                    + name + "&apos;&quot;;" + "'>" + "<table><tr><td><img src='" + image + "' alt= " + name 
+                    + name + "&apos;&quot;;" + "'>" + "<p class='price'>" + price + "</p><table><tr><td><img src='" + image + "' alt= " + name 
                     + " height='150'></td><td><div class='recipe-info'>" + "<h3>" + name + "</h3><p>" + description 
                     + "</p></div></td></tr></table>"
                     + "<form method='post'>"
@@ -81,7 +92,7 @@
             window.onload= function() {
                 for (i=0; i<recipeArray.length; i++) {
                     var s = "";
-                    s += makeRecipe(recipeArray[i].name, recipeArray[i].image, recipeArray[i].description);
+                    s += makeRecipe(recipeArray[i].name, recipeArray[i].image, recipeArray[i].description, recipeArray[i].price);
                     document.getElementById("wrapper").innerHTML += s;
                 }
             }
@@ -101,10 +112,10 @@
             }
         ?>
         <div class="header">
-            <h1 class="logo"><a href="index.html">HOME</a></h1>
+            <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
             <div class="nav-bar">
-                    <div><a href="catalog.php">Catalog</a></div>
-                    <div><a href="cart.html">Shopping Cart</a></div>
+                    <div class="catalog"><a href="catalog.php">Catalog</a></div>
+                    <div class="cart"><a href="cart.html">Shopping Cart</a></div>
             </div>
             <hr>
         </div>
