@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <header>
         <title>Grocer-Ease</title>
         <link rel="stylesheet" href="style.css">
@@ -119,7 +122,6 @@
                 <button type="button" onClick="getVals(this.form)">Place Your Order</button>
 
         </div>
-
         </form>
 </body>
 
