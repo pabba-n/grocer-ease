@@ -16,10 +16,10 @@
         <link rel="stylesheet" href="style.css">
         <meta name='viewport' content="width=device-width, initial scale=1">
         <style>
-            /* body {
-                margin-left: 10%;
+            #wrapper {
                 margin-right: 10%;
-            } */
+                margin-left: 10%;
+            }
 
             .recipe-info h3 {
                 color: #133965;
