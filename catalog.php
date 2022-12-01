@@ -89,7 +89,7 @@
                 for (i=0; i<recipeArray.length; i++) {
                     var s = "";
                     s += makeRecipe(recipeArray[i].name, recipeArray[i].image, recipeArray[i].description, recipeArray[i].price);
-                    document.getElementById("wrapper").innerHTML += s;
+                    document.getElementById("content").innerHTML += s;
                 }
             }
         </script>
@@ -113,8 +113,10 @@
             </div>
             <hr>
         </div>
-        <h2>Catalog</h2>
         <div id="wrapper">
+            <h2>Catalog</h2>
+            <div id="content">
+            </div>
         </div>
         <?php 
             // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
