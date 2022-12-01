@@ -3,7 +3,6 @@
         <link rel="stylesheet" href="style.css">
         <script>
                 let errorMessage = "";
-                // Array to hold celebs
                 
                 function getVals() {
                         errorMessage = "";
@@ -20,64 +19,88 @@
                 }
         </script>
         <style>
-                form {
-                color:rgb(98, 76, 76);
-                background-color: rgb(235, 176, 176);
-                margin-top: 0;
-                margin-left: 25%;
-                margin-right: 25%;
-                padding: 2%;
-                border-radius: 10px;
-                justify-content: center;
-                align-items: center;
-                width:50%;
+                h2 {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: 400;
+                font-size: 30px;
+                margin-left:25%;
+                background-color: inherit;
                 }
                 input[type=text] {
-                border-color: rgb(235, 176, 176);
+                border-color: #000;
+                border-width: 1px;
                 border-radius: 25px;
+                width:60%;
+                text-indent: 2%;
+                }
+                label {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: 20px;
+                }
+                .cardbox2 {
+                height:auto;
+                margin-bottom: 2.5%;
+                }
+                .done {
+                margin-left: 70%;
+                }
+                .opt {
+                margin-top: 8px;
+                }
+                .exp-wrapper input[type=text] {
+                width:7.5%;
+                text-indent: 0%;
+                text-align: center;
                 }
         </style>
 </header>
 <body>
+        <div class="header">
+                <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
+                <div class="nav-bar">
+                        <div class="catalog"><a href="catalog.php">Catalog</a></div>
+                        <div class="cart"><a href="cart.html">Shopping Cart</a></div>
+                </div>
+                <hr>
+        </div>
+
+        <h2>
+                Checkout
+        </h2>
         <form>
+        <div class="cardbox2">
                 <label for="country">Country/Region</label></br>
                 <input type="text" id="country" name="country" value=""></br>
                 <label for="name">Full Name </label></br>
                 <input type="text" id="name" name="name" value=""></br>
-                <label for="name">Phone Number </label></br>
+                <label for="phone">Phone Number </label></br>
                 <input type="text" id="phone" name="phone" value=""></br>
-                <label for="name">Address </label></br>
+                <label for="stAddress">Address </label></br>
                 <input type="text" id="stAddress" name="stAddress" value="" placeholder="Street Address"></br>
-                <label for="name"></label></br>
-                <input type="text" id="optAddress" name="optAddress" value="" placeholder="(optional) Apt, suite, unit, building, floor, etc."></br>
-                <label for="name">City </label></br>
+                <input class="opt" type="text" id="optAddress" name="optAddress" value="" placeholder="Apt, suite, unit, building, floor, etc."></br>
+                <label for="city">City </label></br>
                 <input type="text" id="city" name="city" value=""></br>
-                <label for="name">State </label></br>
+                <label for="state">State </label></br>
                 <input type="text" id="state" name="state" value=""></br>
-                <label for="name">ZIP Code </label></br>
+                <label for="zip">ZIP Code </label></br>
                 <input type="text" id="zip" name="zip" value=""></br>
+        </div>
+        <div class="cardbox2">
+                <label for="card">Credit/Debit Card Number</label></br>
+                <input type="text" id="card" name="card" value=""></br>
+                <label for="cardName">Name on Card</label></br>
+                <input type="text" id="cardName" name="cardName" value=""></br>
+                <label for="cardName">Expiration Date</label></br>
+                <div class="exp-wrapper">
+                        <input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
+                        /
+                        <input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                      </div>
                 </br>
-                <input type="submit" value="Submit" onClick="getVals(this.form)">
-        </form>
-        <form>
-                <label for="country">Country/Region</label></br>
-                <input type="text" id="country" name="country" value=""></br>
-                <label for="name">Full Name </label></br>
-                <input type="text" id="name" name="name" value=""></br>
-                <label for="name">Phone Number </label></br>
-                <input type="text" id="phone" name="phone" value=""></br>
-                <label for="name">Address </label></br>
-                <input type="text" id="stAddress" name="stAddress" value="" placeholder="Street Address"></br>
-                <label for="name"></label></br>
-                <input type="text" id="optAddress" name="optAddress" value="" placeholder="(optional) Apt, suite, unit, building, floor, etc."></br>
-                <label for="name">City </label></br>
-                <input type="text" id="city" name="city" value=""></br>
-                <label for="name">State </label></br>
-                <input type="text" id="state" name="state" value=""></br>
-                <label for="name">ZIP Code </label></br>
-                <input type="text" id="zip" name="zip" value=""></br>
-                </br>
-                <input type="submit" value="Submit" onClick="getVals(this.form)">
+        </div>
+
+        <input class="done" type="submit" value="Submit" onClick="getVals(this.form)">
+
         </form>
 </body>
 
