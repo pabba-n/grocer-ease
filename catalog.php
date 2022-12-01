@@ -115,7 +115,7 @@
             <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
             <div class="nav-bar">
                     <div class="catalog"><a href="catalog.php">Catalog</a></div>
-                    <div class="cart"><a href="cart.html">Shopping Cart</a></div>
+                    <div class="cart"><a href="cart.php">Shopping Cart</a></div>
             </div>
             <hr>
         </div>
