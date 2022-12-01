@@ -64,7 +64,7 @@
         function writeFromAPI (recipeArray) {
             var t = "<ul>";
             for (i = 0; i < recipeArray[0].recipe.ingredients.length; i++) {
-                t += "<li>" + recipeArray[0].recipe.ingredients[i].text + "</li>";
+                t += "<li><p>" + recipeArray[0].recipe.ingredients[i].text + "</p></li>";
             }
             t += "</ul>";
             document.getElementById("ingredients").innerHTML = t;
