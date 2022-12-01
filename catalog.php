@@ -11,8 +11,6 @@
     }
 ?>
 <html>
-    <!-- lasagna $9.75
-    tomato soup $9.50 -->
     <head>
         <title>Grocer-Ease - Catalog</title>
         <link rel="stylesheet" href="style.css">
@@ -56,11 +54,9 @@
             }
             
             .price {
-                /* float: right; */
                 text-align: right;
                 color: #133965;
                 font-size: 25px;
-                /* margin-bottom: 5px; */
             }
         </style>
         <script>
@@ -72,13 +68,13 @@
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "tomatosoup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
-                new Recipe("Mushroom Lasagna", "lasagna.png", "A delicious lasagna recipe.", "$9.75"),
+                new Recipe("Creamy Tomato Soup", "creamy_tomato_soup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
+                new Recipe("Mushroom Lasagna", "mushroom_lasagna.png", "A delicious lasagna recipe.", "$9.75"),
             );
 
             function makeRecipe(name, image, description, price) {
                 var t= "";
-                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.php?recipe=&apos;" 
+                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.html?recipe=&apos;" 
                     + name + "&apos;&quot;;" + "'>" + "<p class='price'>" + price + "</p><table><tr><td><img src='" + image + "' alt= " + name 
                     + " height='150'></td><td><div class='recipe-info'>" + "<h3>" + name + "</h3><p>" + description 
                     + "</p></div></td></tr></table>"
@@ -107,8 +103,6 @@
                 if (array_keys($_POST)[$i] == "Mushroom_Lasagna") {
                     $_SESSION["cart"]["Mushroom Lasagna"] += 1;
                 }
-                // echo array_keys($_POST)[$i];
-                // echo "<br />";
             }
         ?>
         <div class="header">
