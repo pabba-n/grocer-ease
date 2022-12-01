@@ -89,7 +89,7 @@
             <div class="column">
                 <p class="recipeName">Creamy Tomato Soup</p>
                 <p class="ingredients">View Ingredients</p>
-                <form id='myform' method='POST' class='quantity' action='order.html'>
+                <form id='myform' method='POST' class='quantity' action='/order.html'>
                     <input type='button' value='-' class='qtyminus minus' field='quantity' />
                     <input type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Creamy Tomato Soup"]; ?>" class='qty' />
                     <input type='button' value='+' class='qtyplus plus' field='quantity' />
@@ -105,7 +105,7 @@
             <div class="column">
                     <p class="recipeName">Mushroom Lasagna</p>
                     <p class="ingredients">View Ingredients</p>
-                    <form id='myform' method='POST' class='quantity' action='order.html'>
+                    <form id='myform' method='POST' class='quantity' action='/order.html'>
                         <input type='button' value='-' class='qtyminus minus' field='quantity' />
                         <input type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Mushroom Lasagna"]; ?>" class='qty' />
                         <input type='button' value='+' class='qtyplus plus' field='quantity' />
@@ -117,7 +117,7 @@
         </div>
     </div>
     <span> 
-        <form id='myform' method='POST' class='submission' action='order.html'>
+        <form id='myform' method='POST' class='submission' action='/order.html'>
             <div id="lastButton"><input class="help" type="submit" value="Checkout"><div>
         </form>
     </span>
