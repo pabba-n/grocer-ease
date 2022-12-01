@@ -1,26 +1,57 @@
-<?php
+<!-- <?php
     session_start();
-?>
+?> -->
 <html>
     <head>
         <title>Grocer-Ease - Ingredients</title>
         <link rel="stylesheet" href="style.css">
         <meta name='viewport' content="width=device-width, initial scale=1">
     </head>
+    <style>
+        body {
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: center;
+        }
+
+        .brown_line {
+            border: 5px solid #E9C9AD;
+            border-radius: 5px;
+            width: auto;
+        }
+
+        #ingredients {
+            color: #585F67;
+        }
+
+        #ingredients ul {
+            list-style-type: none;
+        }
+
+        #ingredients ul li {
+            margin-bottom: 7px;
+        }
+
+        #ingredients ul li:last-child {
+            margin-bottom: 0px;
+        }
+
+        #recipeURL {
+            font-size: 1.5em;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+    </style>
     <script>
         function fetchIngredients(recipe) {
             const data = null;
-
             recipeFormatted = recipe.toLowerCase();
-
-            console.log(recipeFormatted);
-
             const xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === this.DONE) {
-                    writeIngredients(JSON.parse(this.responseText).hits);
+                    writeFromAPI(JSON.parse(this.responseText).hits);
                 }
             });
 
@@ -30,14 +61,15 @@
             xhr.send(data);
         }
 
-        function writeIngredients (recipeArray) {
-            console.log(recipeArray[0].recipe.ingredients);
+        function writeFromAPI (recipeArray) {
             var t = "<ul>";
             for (i = 0; i < recipeArray[0].recipe.ingredients.length; i++) {
                 t += "<li>" + recipeArray[0].recipe.ingredients[i].text + "</li>";
             }
             t += "</ul>";
             document.getElementById("ingredients").innerHTML = t;
+            recipeURL = recipeArray[0].recipe.url;
+            document.getElementById("recipeURL").innerHTML = "To get the full recipe, click <a href='" + recipeURL + "' target='_blank'>HERE</a>!";
         }
 
         window.onload= function() {
@@ -48,23 +80,33 @@
             recipe = params.recipe;
             recipe = recipe.substring(1, recipe.length - 1);
             fetchIngredients(recipe);
-            document.getElementById("recipe").innerHTML = recipe;
+            document.getElementById("recipe").innerHTML = "Enjoy " + recipe + "!";
+
+            recipeImageFormatted = recipe.replaceAll(' ', '_');
+            document.getElementById("recipeImage").innerHTML = "<img src='" + recipeImageFormatted + ".png' height='300'>";
+
+            document.getElementById("ingredientsTitle").innerHTML = "Ingredients for " + recipe;
         }
     </script>
     <body>
         <div class="header">
-            <h1 class="logo"><a href="index.html">HOME</a></h1>
+            <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
             <div class="nav-bar">
-                    <div><a href="catalog.php">Catalog</a></div>
-                    <div><a href="cart.html">Shopping Cart</a></div>
+                    <div class="catalog"><a href="catalog.php">Catalog</a></div>
+                    <div class="cart"><a href="cart.html">Shopping Cart</a></div>
             </div>
             <hr>
         </div>
         <h2 id="recipe"></h2>
+        <div id="recipeImage"></div>
+        <br />
+        <hr class="brown_line">
+        <h3 id="ingredientsTitle"></h3>
         <div id="ingredients"></div>
-        <?php 
+        <div id="recipeURL"></div>
+        <!-- <?php 
             // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
             // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
-        ?>
+        ?> -->
     </body>
 </html>
