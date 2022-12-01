@@ -23,11 +23,7 @@
         </script>
         <style>
                 h2 {
-                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                font-weight: 350;
-                font-size: 40px;
                 margin-left:25%;
-                background-color: inherit;
                 }
                 input[type=text] {
                 border-color: #000;
