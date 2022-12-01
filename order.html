@@ -21,16 +21,33 @@
         <style>
                 h2 {
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                font-weight: 400;
-                font-size: 30px;
+                font-weight: 350;
+                font-size: 40px;
                 margin-left:25%;
                 background-color: inherit;
                 }
                 input[type=text] {
                 border-color: #000;
                 border-width: 1px;
-                border-radius: 25px;
+                border-radius: 30px;
                 width:60%;
+                text-indent: 2%;
+                }
+                .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px;
+                }
+                button {
+                background-color: #133965;
+                border: none;
+                font-size: 30px;
+                color: #fff;
+                border-radius: 25px;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                height: 75px;
+                width: 300px;
                 text-indent: 2%;
                 }
                 label {
@@ -45,7 +62,7 @@
                 margin-left: 70%;
                 }
                 .opt {
-                margin-top: 8px;
+                margin-top: 3px;
                 }
                 .exp-wrapper input[type=text] {
                 width:7.5%;
@@ -92,14 +109,16 @@
                 <input type="text" id="cardName" name="cardName" value=""></br>
                 <label for="cardName">Expiration Date</label></br>
                 <div class="exp-wrapper">
-                        <input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
+                        <input autocomplete="off" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
                         /
-                        <input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                        <input autocomplete="off" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
                       </div>
                 </br>
         </div>
+        <div class="center">
+                <button type="button" onClick="getVals(this.form)">Place Your Order</button>
 
-        <input class="done" type="submit" value="Submit" onClick="getVals(this.form)">
+        </div>
 
         </form>
 </body>
