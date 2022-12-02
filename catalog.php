@@ -113,8 +113,8 @@
             </div>
             <hr>
         </div>
+        <h2>Catalog</h2>
         <div id="wrapper">
-            <h2>Catalog</h2>
             <div id="content">
             </div>
         </div>
