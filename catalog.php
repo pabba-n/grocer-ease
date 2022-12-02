@@ -68,8 +68,8 @@
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "creamy_tomato_soup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
-                new Recipe("Mushroom Lasagna", "mushroom_lasagna.png", "A delicious lasagna recipe.", "$9.75"),
+                new Recipe("Creamy Tomato Soup", "Creamy_Tomato_Soup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
+                new Recipe("Mushroom Lasagna", "Mushroom_Lasagna.png", "A delicious lasagna recipe.", "$9.75"),
             );
 
             function makeRecipe(name, image, description, price) {
