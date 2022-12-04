@@ -9,6 +9,7 @@
              "Mushroom Lasagna" => 0,
         );
     }
+    header('Cache-Control: no-cache, must-revalidate, max-age=0');
 ?>
 <html>
     <head>
@@ -29,6 +30,10 @@
                 padding-right: 15px;
             }
 
+            .recipe:hover {
+                transform: scale(1.05);
+            }
+
             .recipe-info p {
                 padding-left: 20px;
                 color: #585F67;
@@ -43,6 +48,8 @@
                 cursor: pointer;
                 margin: 1em;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                transition: transform 0.25s;
+                cursor: default;
             }
 
             .button {
@@ -51,6 +58,7 @@
                 background-color: #133965;
                 color: #fff;
                 padding: 8px;
+                cursor: pointer;
             }
             
             .price {
@@ -68,20 +76,26 @@
             }
 
             recipeArray = new Array(
-                new Recipe("Creamy Tomato Soup", "Creamy_Tomato_Soup.png", "A delicious tomato soup recipe. A delicious tomato soup recipe. A delicious tomato soup recipe.", "$9.50"),
-                new Recipe("Mushroom Lasagna", "Mushroom_Lasagna.png", "A delicious lasagna recipe.", "$9.75"),
+                new Recipe("Creamy Tomato Soup", 
+                           "Creamy_Tomato_Soup.png", 
+                           "A delicious and easy tomato soup recipe that will remind you of childhood. This soup has a creamy texture with hints of herbs. Pairs perfectly with bread or grilled cheese.", 
+                           "$9.50"),
+                new Recipe("Mushroom Lasagna", 
+                           "Mushroom_Lasagna.png", 
+                           "A vegetarian spin on the classic lasagna, this recipe adds the unique texture of mushrooms for a more satisfying bite.", 
+                           "$9.75"),
             );
 
             function makeRecipe(name, image, description, price) {
                 var t= "";
-                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.html?recipe=&apos;" 
+                t = "<button class='recipe' name='" + name + "' onclick='" + "location.href = &quot;ingredients.php?recipe=&apos;" 
                     + name + "&apos;&quot;;" + "'>" + "<p class='price'>" + price + "</p><table><tr><td><img src='" + image + "' alt= " + name 
                     + " height='150'></td><td><div class='recipe-info'>" + "<h3>" + name + "</h3><p>" + description 
                     + "</p></div></td></tr></table>"
                     + "<form method='post'>"
                     + "<input type='submit' name='" + name + "' class='button' value='Add to Cart' />"
                     + "</form>"
-                    + "</button><br />" 
+                    + "</button><br />";
                 return t;
             }
 

@@ -1,6 +1,7 @@
-<!-- <?php
+<?php
     session_start();
-?> -->
+    header('Cache-Control: no-cache, must-revalidate, max-age=0');
+?>
 <html>
     <head>
         <title>Grocer-Ease - Ingredients</title>
@@ -36,6 +37,10 @@
             margin-bottom: 0px;
         }
 
+        #ingredientsTitle {
+            font-size: 30px;
+        }
+
         #recipeURL {
             font-size: 1.5em;
             padding-top: 10px;
@@ -43,6 +48,9 @@
         }
         #recipe {
             margin-left: 0;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
     <script>
@@ -75,6 +83,13 @@
             document.getElementById("recipeURL").innerHTML = "To get the full recipe, click <a href='" + recipeURL + "' target='_blank'>HERE</a>!";
         }
 
+        function writeAddToCartButton(recipe) {
+            var t = "<form method='post'>"
+                    + "<input type='submit' name='" + recipe + "' class='button' value='Add to Cart' />"
+                    + "</form>";
+            document.getElementById("addToCart").innerHTML = t;
+        }
+
         window.onload= function() {
             params = new Proxy(new URLSearchParams(window.location.search), {
                 get: (searchParams, prop) => searchParams.get(prop),
@@ -82,6 +97,7 @@
 
             recipe = params.recipe;
             recipe = recipe.substring(1, recipe.length - 1);
+            writeAddToCartButton(recipe);
             fetchIngredients(recipe);
             document.getElementById("recipe").innerHTML = "Enjoy " + recipe + "!";
 
@@ -101,6 +117,8 @@
             <hr>
         </div>
         <div id="wrapper">
+            <button onclick="window.location.href='catalog.php'">Back to Catalog</button>
+            <br />
             <h2 id="recipe"></h2>
             <div id="recipeImage"></div>
             <br />
@@ -108,10 +126,23 @@
             <h3 id="ingredientsTitle"></h3>
             <div id="ingredients"></div>
             <div id="recipeURL"></div>
+            <br />
+            <div id="addToCart"></div>
         </div>
-        <!-- <?php 
+        <?php
+            for ($i = 0; $i < count($_POST); $i++) {
+                if (array_keys($_POST)[$i] == "Creamy_Tomato_Soup") {
+                    $_SESSION["cart"]["Creamy Tomato Soup"] += 1;
+                }
+                if (array_keys($_POST)[$i] == "Mushroom_Lasagna") {
+                    $_SESSION["cart"]["Mushroom Lasagna"] += 1;
+                }
+            }
+        ?>
+        <?php 
             // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
             // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
-        ?> -->
+            // session_destroy();
+        ?>
     </body>
 </html>
