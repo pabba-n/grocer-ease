@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </header>
 <style>
-    body {
-        margin-left: 10%;
-        margin-right: 10%;
-    }
     #lastButton, #price1, #price2{
         text-align: right;
         padding-right: 30%;
@@ -23,16 +19,20 @@
         padding-top:0%;
         padding-bottom:1%;
     }
+    .hideTomato, .hideMushroom {
+        font-size: 15px;
+        line-height: 105%;
+    }
+    .ingredients {
+        text-decoration: underline;
+        font-size: 15px;
+    }
     .quantity{
         margin: auto;
         position: absolute;
         bottom: 20px;
         left: 20px;
     }
-    /* #price1, #price2 {
-        text-align: right;
-        margin
-    } */
     .help {
         float: right;
         border-radius: 8px;
@@ -41,12 +41,6 @@
         padding: 8px;
         margin-bottom: 20px;
     }
-    /* input #checkout {
-        border-radius: 8px;
-        background-color: #133965;
-        color: #fff;
-        padding: 8px;
-    } */
     .cardbox2{
         position:relative;
         margin: 15px auto;
@@ -61,17 +55,33 @@
     .row {
         display: flex;
     }
-
     .column {
         flex: 50%;
+    }
+    .hideTomato {
+        display: none;
+    }
+
+    .ingredients:hover + .hideTomato {
+        display: block;
+        color: gray;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .hideMushroom {
+        display: none;
+    }
+
+    .ingredients:hover + .hideMushroom {
+        display: block;
+        color: gray;
+        font-size: 15px;
+        text-decoration: none;
     }
     input.qtyplus { background-color: white; width:25px; height:25px; border-radius: 50%; border: 2px solid #585F67;}
     input.qtyminus { background-color: white; width:25px; height:25px; border-radius: 50%; border: 2px solid #585F67;}
 </style>
-<!-- <?php 
-        echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
-        echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
-?> -->
 
 <body>
     <div class="header">
@@ -89,9 +99,37 @@
             <div class="column">
                 <p class="recipeName">Creamy Tomato Soup</p>
                 <p class="ingredients">View Ingredients</p>
-                <form id='myform' method='POST' class='quantity' action='/order.html'>
+                <p class="hideTomato"> <?php
+    $server = "localhost";
+    $userid = "uxzhryenrodc8";
+    $pw = "&227f@#5k1*6";
+    $db= "dbkqyfriigebv4";
+    
+    // Create connection
+    $conn = new mysqli($server, $userid, $pw );
+    
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    
+    //select the database
+    $conn->select_db($db);
+    $tomato = "SELECT * FROM `RECIPE` WHERE RecipeName = 'Creamy Tomato Soup';";
+    $result = $conn->query($tomato);
+    if ($result->num_rows > 0) {
+        $counter = 0;
+       while($row = $result->fetch_array()) 
+       {
+            $ingredients = $row[1];
+            echo "$ingredients, ";
+       }
+    }
+    $conn->close();
+    ?></p>
+                <form id='myform' method='POST' class='quantity' action='order.php'>
                     <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                    <input type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Creamy Tomato Soup"]; ?>" class='qty' />
+                    <input id='tomato' type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Creamy Tomato Soup"]; ?>" class='qty' />
                     <input type='button' value='+' class='qtyplus plus' field='quantity' />
                 </form>
             </div>
@@ -105,9 +143,37 @@
             <div class="column">
                     <p class="recipeName">Mushroom Lasagna</p>
                     <p class="ingredients">View Ingredients</p>
-                    <form id='myform' method='POST' class='quantity' action='/order.html'>
+                    <p class="hideMushroom"><?php
+    $server = "localhost";
+    $userid = "uxzhryenrodc8";
+    $pw = "&227f@#5k1*6";
+    $db= "dbkqyfriigebv4";
+    
+    // Create connection
+    $conn = new mysqli($server, $userid, $pw );
+    
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    
+    //select the database
+    $conn->select_db($db);
+    $mushroom = "SELECT * FROM `RECIPE` WHERE RecipeName = 'Mushroom Lasagna';";
+    $result = $conn->query($mushroom);
+    if ($result->num_rows > 0) {
+        $counter = 0;
+       while($row = $result->fetch_array()) 
+       {
+            $ingredients = $row[1];
+            echo "$ingredients, ";
+       }
+    }
+    $conn->close();
+    ?></p>
+                    <form id='myform' method='POST' class='quantity' action='order.php'>
                         <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                        <input type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Mushroom Lasagna"]; ?>" class='qty' />
+                        <input id='mushroom' type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Mushroom Lasagna"]; ?>" class='qty' />
                         <input type='button' value='+' class='qtyplus plus' field='quantity' />
                     </form>
             </div>
@@ -117,7 +183,7 @@
         </div>
     </div>
     <span> 
-        <form id='myform' method='POST' class='submission' action='/order.html'>
+        <form id='myform' method='POST' class='submission' action='order.php'>
             <div id="lastButton"><input class="help" type="submit" value="Checkout"><div>
         </form>
     </span>
@@ -126,16 +192,11 @@
     <script>
     jQuery(document).ready(($) => {
 
-        
-            // let $input = $(this).prev('input.qty');
-            // let val = parseInt($input.val());
-            // $input.val( val+1 ).change();
         $('.quantity').on('click', '.plus', function(e) {
             let $input = $(this).prev('input.qty');
             let val = parseInt($input.val());
             $input.val( val+1 ).change();
         });
-        //once user adds more to the quantity, how do you update the session variable
         $('.quantity').on('click', '.minus', 
             function(e) {
             let $input = $(this).next('input.qty');
@@ -144,6 +205,7 @@
                 $input.val( val-1 ).change();
             } 
         });
+       
     });
    </script>
     
