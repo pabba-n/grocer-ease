@@ -34,6 +34,7 @@
         height: 4px;
         width: 25%;
     }
+    
     </style>
     <body>
         <div class="header">
@@ -45,7 +46,7 @@
             <hr>
         </div>
         <div class="content">
-            <img src="check icon.png" width:250>
+            <img src="check icon.png" width="250">
             <h2 id="thankyou">Thank you for your order!</h2>
             <hr id="bar">
             <p id="info1">See your order details below.</p>
