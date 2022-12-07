@@ -30,13 +30,13 @@
                 padding-right: 15px;
             }
 
-            .recipe:hover {
-                transform: scale(1.05);
-            }
-
             .recipe-info p {
                 padding-left: 20px;
                 color: #585F67;
+            }
+
+            .recipe:hover {
+                transform: scale(1.05);
             }
 
             .recipe {

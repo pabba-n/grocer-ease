@@ -84,6 +84,22 @@
 </style>
 
 <body>
+    <?php
+        for ($i = 0; $i < count($_POST); $i++) {
+            if (array_keys($_POST)[$i] == "tomato_soup_minus") {
+                $_SESSION["cart"]["Creamy Tomato Soup"] -= 1;
+            }
+            if (array_keys($_POST)[$i] == "tomato_soup_plus") {
+                $_SESSION["cart"]["Creamy Tomato Soup"] += 1;
+            }
+            if (array_keys($_POST)[$i] == "mushroom_lasagna_minus") {
+                $_SESSION["cart"]["Mushroom Lasagna"] -= 1;
+            }
+            if (array_keys($_POST)[$i] == "mushroom_lasagna_plus") {
+                $_SESSION["cart"]["Mushroom Lasagna"] += 1;
+            }
+        }
+    ?>
     <div class="header">
         <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
         <div class="nav-bar">
@@ -127,10 +143,10 @@
     }
     $conn->close();
     ?></p>
-                <form id='myform' method='POST' class='quantity' action='order.php'>
-                    <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                <form method='POST' class='quantity'>
+                    <input type='submit' value='-' name="tomato_soup_minus" class='qtyminus minus' field='quantity' />
                     <input id='tomato' type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Creamy Tomato Soup"]; ?>" class='qty' />
-                    <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                    <input type='submit' value='+' name="tomato_soup_plus" class='qtyplus plus' field='quantity' />
                 </form>
             </div>
             <div class="column">
@@ -171,10 +187,10 @@
     }
     $conn->close();
     ?></p>
-                    <form id='myform' method='POST' class='quantity' action='order.php'>
-                        <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                    <form method='POST' class='quantity'>
+                        <input type='submit' value='-' name='mushroom_lasagna_minus' class='qtyminus minus' field='quantity' />
                         <input id='mushroom' type='text' name='quantity' value="<?php echo $_SESSION["cart"]["Mushroom Lasagna"]; ?>" class='qty' />
-                        <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                        <input type='submit' value='+' name='mushroom_lasagna_plus' class='qtyplus plus' field='quantity' />
                     </form>
             </div>
             <div class="column">
@@ -208,6 +224,9 @@
        
     });
    </script>
-    
+   <?php 
+            // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
+            // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
+    ?>
 </body>
 <html>

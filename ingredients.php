@@ -41,6 +41,12 @@
             font-size: 30px;
         }
 
+        #recipeYield {
+            font-size: 1.5em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
         #recipeURL {
             font-size: 1.5em;
             padding-top: 10px;
@@ -79,6 +85,8 @@
             }
             t += "</ul>";
             document.getElementById("ingredients").innerHTML = t;
+            servingSize = recipeArray[0].recipe.yield;
+            document.getElementById("recipeYield").innerHTML = "Serves " + servingSize + " people";
             recipeURL = recipeArray[0].recipe.url;
             document.getElementById("recipeURL").innerHTML = "To get the full recipe, click <a href='" + recipeURL + "' target='_blank'>HERE</a>!";
         }
@@ -108,6 +116,7 @@
         }
     </script>
     <body>
+        
         <div class="header">
             <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
             <div class="nav-bar">
@@ -125,6 +134,7 @@
             <hr class="brown_line">
             <h3 id="ingredientsTitle"></h3>
             <div id="ingredients"></div>
+            <div id="recipeYield"></div>
             <div id="recipeURL"></div>
             <br />
             <div id="addToCart"></div>
