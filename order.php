@@ -1,26 +1,11 @@
 <?php
     session_start();
 ?>
+<html>
 <header>
         <title>Grocer-Ease</title>
         <link rel="stylesheet" href="style.css">
-        <script>
-                let errorMessage = "";
-                
-                function getVals() {
-                        errorMessage = "";
-                        let valid = true;
-                        // match with one of us given certain answers
-                        if (valid) {
-                                alert("Thank you for your response! We'll" +
-                                " reach out with more details when we" + 
-                                " find a good match!");
-                        } else {
-                                alert(errorMessage);
-                        }
-
-                }
-        </script>
+        
         <style>
                 input[type=text] {
                 border-color: #000;
@@ -35,18 +20,27 @@
                 align-items: center;
                 height: 100px;
                 }
+                button.cont {
+                        margin-left: 70%;
+                        margin-bottom: 2%;
+                }
                 button {
+                transition: all .5s ease;
                 background-color: #133965;
                 border: none;
-                font-size: 30px;
+                font-size: 20px;
                 color: #fff;
-                border-radius: 25px;
+                border-radius: 20px;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                height: 75px;
-                width: 300px;
+                height: 50px;
+                width: 200px;
                 text-indent: 2%;
                 }
-                label {
+                button:hover {
+                color: #133965;
+                background-color: #fff;
+                }
+                label, div div {
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-size: 20px;
                 }
@@ -62,8 +56,24 @@
                 }
                 .exp-wrapper input[type=text] {
                 width:7.5%;
+                margin-left: 0%;
                 text-indent: 0%;
                 text-align: center;
+                }
+                h3 {
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: 350;
+                font-size: 25px;
+                color:#444;
+                margin-top: 0%;
+                margin-bottom: 2%;
+                }
+                div div,div label,div input {
+                margin-left: 2%;
+                }
+                hr.order {
+                margin-left: 2%;
+                width: 50%;
                 }
         </style>
 </header>
@@ -82,6 +92,7 @@
         </h2>
         <form>
         <div class="cardbox2">
+                <h3>1 Shipping Address</h3>
                 <label for="country">Country/Region</label></br>
                 <input type="text" id="country" name="country" value=""></br>
                 <label for="name">Full Name </label></br>
@@ -99,22 +110,180 @@
                 <input type="text" id="zip" name="zip" value=""></br>
         </div>
         <div class="cardbox2">
+                <h3>2 Payment Method</h3>
                 <label for="card">Credit/Debit Card Number</label></br>
                 <input type="text" id="card" name="card" value=""></br>
                 <label for="cardName">Name on Card</label></br>
                 <input type="text" id="cardName" name="cardName" value=""></br>
                 <label for="cardName">Expiration Date</label></br>
                 <div class="exp-wrapper">
-                        <input autocomplete="off" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
-                        /
-                        <input autocomplete="off" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+                        <input type="text" id="month" name="month" maxlength="2" inputmode="numerical" placeholder="MM" type="number" />
+                         / 
+                        <input type="text" id="year" name="year" maxlength="2" inputmode="numerical" placeholder="YY" type="number" />
                       </div>
-                </br>
         </div>
+        <div class="cardbox2">
+                <h3>3 Order Summary</h3>
+                <?php
+                $sub = (9.5 * $_SESSION["cart"]["Creamy Tomato Soup"]) + (9.75 * $_SESSION["cart"]["Mushroom Lasagna"]);
+                echo "<div>Subtotal: $" . bcdiv($sub,1, 2) . "</div>";
+                echo "<div>Shipping: $0</div><hr class='order'>";
+
+                $tax = $sub * .0625;
+                $total = $tax + $sub;
+                echo "<div>Tax: $" . bcdiv($tax,1, 2) . "</div><hr class='order'>";
+                echo "<div>Total: $" . bcdiv($total,1, 2) . "</div>";
+                ?>
+                <a href="catalog.php"><button type="button" class="cont">Continue Shopping</button></a>
+        </div>
+        
+        
         <div class="center">
                 <button type="button" onClick="getVals(this.form)">Place Your Order</button>
-
         </div>
         </form>
-</body>
+        <script>
+                function goCatalog() {
+                        window.location.href="catalog.php";
+                }
+                let errorMessage = "";
+                function validateCountry() {
+                        var country = document.getElementsByName('country')[0].value;
+                        if (country == "") {
+                                errorMessage += "Please enter your country\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z\s]*$/.test(country);
+                                if (!valid) {
+                                        errorMessage += "A country  \n";
+                                }
+                        return valid;
+                }
+                function validateName() {
+                        var name = document.getElementsByName('name')[0].value;
+                        if (name == "") {
+                                errorMessage += "Please enter your name\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z]*\s[A-Za-z]*$/.test(name);
+                        if (!valid) {
+                                errorMessage += "Please enter your first and last name\n";
+                        }
+                        return valid;
+                }
+                function validatePhone() {
+                        var phone = document.getElementsByName('phone')[0].value;
+                        if (phone == "") {
+                                errorMessage += "Please enter your phone number\n";
+                                return false;
+                        }
+                        var valid =  /^[0-9]*$/.test(phone);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid phone number\n";
+                        }
+                        return valid;
+                }
+                function validateSt() {
+                        var st = document.getElementsByName('stAddress')[0].value;
+                        if (st == "") {
+                                errorMessage += "Please enter your street address\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z0-9\s]*$/.test(st);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid street address\n";
+                        }
+                        return valid;
+                }
+                function validateCity() {
+                        var city = document.getElementsByName('city')[0].value;
+                        if (city == "") {
+                                errorMessage += "Please enter your city\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z\s]*$/.test(city);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid city\n";
+                        }
+                        return valid;
+                }
+                function validateState() {
+                        var state = document.getElementsByName('state')[0].value;
+                        if (state == "") {
+                                errorMessage += "Please enter your state\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z\s]*$/.test(state);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid state\n";
+                        }
+                        return valid;
+                }
+                function validateZip() {
+                        var zip = document.getElementsByName('zip')[0].value;
+                        if (zip == "") {
+                                errorMessage += "Please enter your zip code\n";
+                                return false;
+                        }
+                        var valid =  /^[0-9]*$/.test(zip);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid zip code\n";
+                        }
+                        return valid;
+                }
+                function validateCard() {
+                        var card = document.getElementsByName('card')[0].value;
+                        if (card == "") {
+                                errorMessage += "Please enter your credit/debit card number\n";
+                                return false;
+                        }
+                        var valid =  /^[0-9]*$/.test(card);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid credit/debit card number\n";
+                        }
+                        return valid;
+                }
+                function validateCardName() {
+                        var cardName = document.getElementsByName('cardName')[0].value;
+                        if (cardName == "") {
+                                errorMessage += "Please enter your credit/debit card name\n";
+                                return false;
+                        }
+                        var valid =  /^[A-Za-z]*\s[A-Za-z]*$/.test(cardName);
+                        if (!valid) {
+                                errorMessage += "Please enter a valid name for your credit card\n";
+                        }
+                        return valid;
+                }
+                function validateExp() {
+                        var month = document.getElementsByName('month')[0].value;
+                        var year = document.getElementsByName('year')[0].value;
+                        if (month == "" || year == "") {
+                                errorMessage += "Please enter your card expiration date\n";
+                                return false;
+                        }
+                        var valid = /^[0-9]*$/.test(month) & /^[0-9]*$/.test(year);
+                        valid &= valid >= 23;
+                        if (!valid) {
+                                errorMessage += "Please enter a valid expiration date\n";
+                        }
+                        return valid;
+                }
+                function getVals() {
+                        errorMessage = "";
+                        let valid = true;
+                        valid &= validateCountry() & validateName() & validatePhone();
+                        valid &= validateSt() & validateCity() & validateState();
+                        valid &= validateZip() & validateCard() & validateCardName();
+                        valid &= validateExp();
+                        // match with one of us given certain answers
+                        if (valid) {
+                                window.location.href="order_summary.php";
+                        } else {
+                                alert(errorMessage);
+                        }
 
+                }
+        </script>
+</body>
+</html>

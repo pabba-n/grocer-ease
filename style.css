@@ -59,41 +59,39 @@ button {
 div.nav-bar {
         display:flex;
 }
-div.cart {
-        margin-left: 60%;
+.cart {
+        margin-left: 65%;
+        margin-right: 10%;
+        border-radius: 50%;
+        padding:.5% 1%;
+	transition: 0.4s;
 }
 a {
         text-decoration: none;
 }
-div.catalog{
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+.catalog {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         margin-left:10%;
         font-size: 16px;
-        position: relative;
-        display: block;
         color: #133965;
-        text-decoration: none;
-        border: none;
         padding: 10px 40px;
         text-transform: uppercase;
-        overflow: hidden;
+	transition: 0.4s;
+
 }
-.catalog::before{
-        background: #F3E9D9;
-        color: #fff;
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        z-index: -1;
-        transition: all 0.3s ease;
-        width: 0%;
-        height: 100%;
+
+.catalog:hover,.cart:hover {
+	background: #F3E9D9;
+	box-shadow: 0 0 0 10px rgba(250, 250, 250, 0.1)
 }
-.catalog:hover::before{
-        width: 100%;
+
+.catalog::before,.cart::before {
+	background: #F3E9D9;
+	transition: 0.4s;
+	opacity: 1;
 }
+
 hr {
         width: 80%;
 }
