@@ -79,14 +79,15 @@
         </style>
 </header>
 <body>
-        <div class="header">
-                <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
-                <div class="nav-bar">
-                        <div class="catalog"><a href="catalog.php">Catalog</a></div>
-                        <div class="cart"><a href="cart.php">Shopping Cart</a></div>
-                </div>
-                <hr>
+<div class="header">
+        <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
+        <div class="nav-bar">
+                <a class="catalog"href="catalog.php"><div>Catalog</div></a>
+                <a class="cart"href="cart.php"><i class="fa fa-shopping-cart" style="font-size:30px;color:#133965"></i></a>
+                <!-- <div class="cart"><a href="cart.php">Shopping Cart</a></div> -->
         </div>
+        <hr>
+</div>
 
         <h2>
                 Checkout
