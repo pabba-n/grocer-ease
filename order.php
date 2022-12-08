@@ -26,6 +26,13 @@
                 .btn {
                         margin-left: 70%;
                         margin-bottom: 2%;
+                        height: 50px;
+                        width: 200px;
+                }
+
+                .cont{
+                        height: 35px;
+                        width: 200px;
                 }
                 button,.cont,.btn {
                 transition: all .5s ease;
@@ -35,8 +42,6 @@
                 color: #fff;
                 border-radius: 20px;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                height: 50px;
-                width: 200px;
                 text-indent: 2%;
                 }
                 button:hover,.btn:hover {
