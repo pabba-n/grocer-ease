@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="style.css">
 </header>
 <style>
-    #lastButton, #price1, #price2{
+    #price1, #price2{
         text-align: right;
-        padding-right: 30%;
+        padding-right: 28%;
         padding-top:0%;
         padding-bottom:1%;
     }
-    #priceLabel {
+    #lastButton, #priceLabel {
         text-align: right;
         padding-right: 32%;
         padding-top:0%;
