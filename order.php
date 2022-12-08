@@ -62,12 +62,6 @@
                 .opt {
                 margin-top: 3px;
                 }
-                .exp-wrapper input[type=text] {
-                width:7.5%;
-                margin-left: 0%;
-                text-indent: 0%;
-                text-align: center;
-                }
                 h3 {
                 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                 font-weight: 350;
@@ -82,6 +76,12 @@
                 hr.order {
                 margin-left: 2%;
                 width: 50%;
+                }
+                .exp-wrapper input[type=text] {
+                width:7.5%;
+                margin-left: 0%;
+                text-indent: 0%;
+                text-align: center;
                 }
         </style>
 </header>
