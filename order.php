@@ -24,7 +24,7 @@
                         margin-left: 70%;
                         margin-bottom: 2%;
                 }
-                button {
+                button,.btn {
                 transition: all .5s ease;
                 background-color: #133965;
                 border: none;
@@ -36,7 +36,7 @@
                 width: 200px;
                 text-indent: 2%;
                 }
-                button:hover {
+                button:hover,.btn:hover {
                 color: #133965;
                 background-color: #fff;
                 }
@@ -139,7 +139,7 @@
         
         
         <div class="center">
-                <input type="submit" value='Place Your Order' />
+                <input type="submit" class="btn" value='Place Your Order' />
                 <!-- onClick="getVals(this.form)" -->
         </div>
         </form>
@@ -264,7 +264,7 @@
                                 return false;
                         }
                         var valid = /^[0-9]*$/.test(month) & /^[0-9]*$/.test(year);
-                        valid &= valid >= 23;
+                        valid &= (year >= 23);
                         if (!valid) {
                                 errorMessage += "Please enter a valid expiration date\n";
                         }
