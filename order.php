@@ -16,10 +16,6 @@
                 width:60%;
                 text-indent: 2%;
                 }
-                .cont{
-                        height: 35px;
-                        width: 250px;
-                }
                 .center {
                 display: flex;
                 justify-content: center;
@@ -27,7 +23,11 @@
                 height: 100px;
                 }
                
-                button,.btn {
+                .btn {
+                        margin-left: 70%;
+                        margin-bottom: 2%;
+                }
+                button,.cont,.btn {
                 transition: all .5s ease;
                 background-color: #133965;
                 border: none;
@@ -38,8 +38,6 @@
                 height: 50px;
                 width: 200px;
                 text-indent: 2%;
-                margin-left: 70%;
-                margin-bottom: 2%;
                 }
                 button:hover,.btn:hover {
                 color: #133965;
@@ -73,7 +71,7 @@
                 margin-top: 0%;
                 margin-bottom: 2%;
                 }
-                .cardbox2 div,.cardbox2 label,.cardbox2 input {
+                .cardbox2 div,.cardbox2 label,.cardbox2 input[type=text] {
                 margin-left: 2%;
                 }
                 hr.order {
