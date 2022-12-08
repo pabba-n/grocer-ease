@@ -48,7 +48,7 @@ p{
     font-size: 20px;
 }
 
-button {
+button,.button,.help {
         transition: all .5s ease;
         background-color: #133965;
         border: none;
