@@ -17,6 +17,7 @@
         font-size: 60px;
         color: #D1843C;
         padding: 15px;
+        text-align: center;
     }
 
     #info1 {
@@ -35,6 +36,9 @@
         background: #D1843C;
         height: 4px;
         width: 25%;
+    }
+    .cont{
+        text-align: center;
     }
     
     </style>
@@ -103,7 +107,9 @@
                 $tax = bcdiv($tax,1, 2);
                 $total = bcdiv($total,1, 2);
                 
-    
+                $tsPrice = $tsPrice * $_SESSION["cart"]["Creamy Tomato Soup"];
+                $mlPrice = $mlPrice * $_SESSION["cart"]["Mushroom Lasagna"];
+                
                 $orderSql = "INSERT INTO `orders` (`Order_Date`, `Name`, `Phone`, " 
                             . "`Address`, `City`, `State`, `Zip`, `Order_Details`, "
                             . "`Total_Cost`) "
@@ -118,20 +124,20 @@
             <img src="check icon.png" width="250">
             <?php
                 $customerName = $_REQUEST['name'];
-                echo "<h2 id='thankyou'>Thank you for your order, $customerName!</h2>";
+                echo "<h3 id='thankyou'>Thank you for your order, $customerName!</h2>";
             ?>
             <hr id="bar">
             <p id="info1">See your order details below.</p>
             <p id="info2">Estimated Delivery: </p><br />
             <?php
                     if ($_SESSION["cart"]["Creamy Tomato Soup"] > 0) {
-                        echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $$tsPrice</p>";
+                        echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $" . bcdiv($tsPrice,1, 2) . "</p>";
                     }
                     if ($_SESSION["cart"]["Mushroom Lasagna"] > 0) {
-                        echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $$mlPrice</p><br />";
+                        echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $" . bcdiv($mlPrice,1, 2) . "</p><br />";
                     }
-                    echo "<p style='color: black'>Tax: $$tax</p>";
-                    echo "<p style='color: black'>Total: $$total</p><br />";
+                    echo "<p style='color: black'>Tax: $" . bcdiv($tax,1, 2) . "</p>";
+                    echo "<p style='color: black'>Total: $" . bcdiv($total,1, 2) . "</p><br />";
             ?>
             <p id="info3" style="color: black">Shipping address: </p>
             <?php

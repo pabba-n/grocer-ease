@@ -75,6 +75,9 @@
         display: none;
     }
 
+    .ingredients:hover{
+        text-decoration: none;
+    }
     .ingredients:hover + .hideMushroom {
         display: block;
         color: gray;
@@ -153,7 +156,7 @@
                 </form>
             </div>
             <div class="column">
-                <p id="price1">9.50</p>
+                <p id="price1"><?php echo "$" . bcdiv(($_SESSION["cart"]["Creamy Tomato Soup"] * 9.50),1, 2)?></p>
             </div>
         </div>   
     </div>
@@ -197,7 +200,7 @@
                     </form>
             </div>
             <div class="column">
-                  <p id="price2">9.75</p>
+                  <p id="price2"><?php echo "$". bcdiv(($_SESSION["cart"]["Mushroom Lasagna"] * 9.75),1, 2)?></p>
             </div>
         </div>
     </div>

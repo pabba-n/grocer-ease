@@ -16,16 +16,17 @@
                 width:60%;
                 text-indent: 2%;
                 }
+                .cont{
+                        height: 35px;
+                        width: 250px;
+                }
                 .center {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 height: 100px;
                 }
-                button.cont {
-                        margin-left: 70%;
-                        margin-bottom: 2%;
-                }
+               
                 button,.btn {
                 transition: all .5s ease;
                 background-color: #133965;
@@ -37,6 +38,8 @@
                 height: 50px;
                 width: 200px;
                 text-indent: 2%;
+                margin-left: 70%;
+                margin-bottom: 2%;
                 }
                 button:hover,.btn:hover {
                 color: #133965;
@@ -96,8 +99,6 @@
         <form method='get' action='order_summary.php' onSubmit='return getVals()'>
         <div class="cardbox2">
                 <h3>1 Shipping Address</h3>
-                <label for="country">Country/Region</label></br>
-                <input type="text" id="country" name="country" value=""></br>
                 <label for="name">Full Name </label></br>
                 <input type="text" id="name" name="name" value=""></br>
                 <label for="phone">Phone Number </label></br>
@@ -111,6 +112,8 @@
                 <input type="text" id="state" name="state" value=""></br>
                 <label for="zip">ZIP Code </label></br>
                 <input type="text" id="zip" name="zip" value=""></br>
+                <label for="country">Country/Region</label></br>
+                <input type="text" id="country" name="country" value=""></br>
         </div>
         <div class="cardbox2">
                 <h3>2 Payment Method</h3>
@@ -169,11 +172,11 @@
 
                 if ($tsQty > 0) {
                         $tsSub = $tsPrice * $tsQty;
-                        echo "<div>Creamy Tomato Soup x $tsQty : $$tsSub</div>";
+                        echo "<div>Creamy Tomato Soup x $tsQty : $". bcdiv($tsSub,1, 2) . "</div>";
                 }
                 if ($mlQty > 0) {
                         $mlSub = $mlPrice * $mlQty;
-                        echo "<div>Mushroom Lasagna x $mlQty : $$mlSub</div>";
+                        echo "<div>Mushroom Lasagna x $mlQty : $" . bcdiv($mlSub,1, 2) . "</div>";
                 }
 
                 echo "<hr class='order'>";
@@ -187,12 +190,13 @@
                 echo "<div>Tax: $" . bcdiv($tax,1, 2) . "</div><hr class='order'>";
                 echo "<div>Total: $" . bcdiv($total,1, 2) . "</div>";
                 ?>
-                <a href="catalog.php"><button type="button" class="cont">Continue Shopping</button></a>
+                <input type="submit" class="btn" value='Place Your Order' />
+                
         </div>
         
         
         <div class="center">
-                <input type="submit" class="btn" value='Place Your Order' />
+                <a href="catalog.php"><button type="button" class="cont">Continue Shopping</button></a>
                 <!-- onClick="getVals(this.form)" -->
         </div>
         </form>

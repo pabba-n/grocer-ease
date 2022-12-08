@@ -58,7 +58,7 @@ button,.button,.help {
         text-indent: 2%;
 }
 
-button:hover {
+button:hover, .button:hover, .help:hover {
         color: #133965;
         background-color: #fff;
 }
