@@ -87,13 +87,14 @@
                 $sub = (9.5 * $_SESSION["cart"]["Creamy Tomato Soup"]) + (9.75 * $_SESSION["cart"]["Mushroom Lasagna"]);
                 $tax = $sub * .0625;
                 $total = $tax + $sub;
+                
     
                 $orderSql = "INSERT INTO `orders` (`Order_Date`, `Name`, `Phone`, " 
                             . "`Address`, `City`, `State`, `Zip`, `Order_Details`, "
                             . "`Total_Cost`) "
                             . "VALUES ('$orderDate', '$_REQUEST[name]', '$_REQUEST[phone]', "
                             . "'$_REQUEST[stAddress]', '$_REQUEST[city]', '$_REQUEST[state]', "
-                            . "'$_REQUEST[zip]', $orderDetails, $total)";
+                            . "'$_REQUEST[zip]', '$orderDetails', $total)";
 
                 $conn->query($orderSql);
                 $conn->close();
