@@ -3,6 +3,7 @@
 ?>
 <html>
     <header>
+    <meta name='viewport' content="width=device-width, initial scale=1">
         <title>Grocer-Ease</title>
         <link rel="stylesheet" href="style.css">
         <meta name='viewport' content="width=device-width, initial scale=1">
@@ -39,12 +40,12 @@
     <body>
         <h2>Hello</h2>
         <div class="header">
-            <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
-            <div class="nav-bar">
-                    <div><a href="catalog.php">Catalog</a></div>
-                    <div><a href="cart.php">Shopping Cart</a></div>
-            </div>
-            <hr>
+                <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
+                <div class="nav-bar">
+                        <div class="catalog"><a href="catalog.php">Catalog</a></div>
+                        <div class="cart"><a href="cart.php">Shopping Cart</a></div>
+                </div>
+                <hr>
         </div>
         <div class="content">
             <?php

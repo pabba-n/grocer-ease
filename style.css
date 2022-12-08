@@ -49,7 +49,18 @@ p{
 }
 
 button {
-    color: #133965;
+        transition: all .5s ease;
+        background-color: #133965;
+        border: none;
+        color: #fff;
+        border-radius: 20px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        text-indent: 2%;
+}
+
+button:hover {
+        color: #133965;
+        background-color: #fff;
 }
 
 .buttonText {
@@ -75,7 +86,7 @@ a {
         margin-left:10%;
         font-size: 16px;
         color: #133965;
-        padding: 10px 40px;
+        padding: 12px 40px;
         text-transform: uppercase;
 	transition: 0.4s;
 

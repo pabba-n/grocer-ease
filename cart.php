@@ -4,6 +4,7 @@
 <html>
 <header>
     <title>Grocer-Ease</title>
+    <meta name='viewport' content="width=device-width, initial scale=1">
     <link rel="stylesheet" href="style.css">
 </header>
 <style>
@@ -101,13 +102,13 @@
         }
     ?>
     <div class="header">
-        <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
-        <div class="nav-bar">
-                <div class="catalog"><a href="catalog.php">Catalog</a></div>
-                <div class="cart"><a href="cart.php">Shopping Cart</a></div>
+                <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
+                <div class="nav-bar">
+                        <div class="catalog"><a href="catalog.php">Catalog</a></div>
+                        <div class="cart"><a href="cart.php">Shopping Cart</a></div>
+                </div>
+                <hr>
         </div>
-        <hr>
-</div>
     <h2>Shopping Cart</h2>
     <div id="priceLabel"><p>Price</p></div>
     <div class="cardBox2">
