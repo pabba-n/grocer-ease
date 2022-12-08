@@ -39,7 +39,6 @@
     
     </style>
     <body>
-        <h2>Hello</h2>
         <div class="header">
         <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
         <div class="nav-bar">
@@ -64,17 +63,27 @@
     
                 $conn->select_db($db);
 
-                // $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Creamy Tomato Soup';";
+                $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Creamy Tomato Soup';";
 
-                // $result = $conn->query($sql);
-                // if ($result->num_rows > 0) {
-                //     $counter = 0;
-                //     while($row = $result->fetch_array()) 
-                //     {
-                //         $tsPrice = $row[0];
-                //         echo $tsPrice;
-                //     }
-                // }
+                $result = $conn->query($sql);
+                $tsPrice = 0;
+                if ($result->num_rows > 0) {
+                        while($row = $result->fetch_array()) 
+                        {
+                                $tsPrice = $row[0];
+                        }
+                }
+
+                $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Mushroom Lasagna';";
+
+                $result = $conn->query($sql);
+                $mlPrice = 0;
+                if ($result->num_rows > 0) {
+                        while($row = $result->fetch_array()) 
+                        {
+                                $mlPrice = $row[0];
+                        }
+                }
     
                 $serverDate = $_SERVER['REQUEST_TIME'];
                 $orderDate = date('Y-m-d', $serverDate);
@@ -87,9 +96,12 @@
                     }
                 }
 
-                $sub = (9.5 * $_SESSION["cart"]["Creamy Tomato Soup"]) + (9.75 * $_SESSION["cart"]["Mushroom Lasagna"]);
+                $sub = ($tsPrice * $_SESSION["cart"]["Creamy Tomato Soup"]) + ($mlPrice * $_SESSION["cart"]["Mushroom Lasagna"]);
                 $tax = $sub * .0625;
                 $total = $tax + $sub;
+
+                $tax = bcdiv($tax,1, 2);
+                $total = bcdiv($total,1, 2);
                 
     
                 $orderSql = "INSERT INTO `orders` (`Order_Date`, `Name`, `Phone`, " 
@@ -110,22 +122,55 @@
             ?>
             <hr id="bar">
             <p id="info1">See your order details below.</p>
-            <?php 
+            <p id="info2">Estimated Delivery: </p><br />
+            <?php
                     if ($_SESSION["cart"]["Creamy Tomato Soup"] > 0) {
-                        echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "</p>";
+                        echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $$tsPrice</p>";
                     }
                     if ($_SESSION["cart"]["Mushroom Lasagna"] > 0) {
-                        echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "</p><br />";
+                        echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: $$mlPrice</p><br />";
                     }
+                    echo "<p style='color: black'>Tax: $$tax</p>";
+                    echo "<p style='color: black'>Total: $$total</p><br />";
             ?>
-            <p id="info2">Estimated Delivery Date: </p>
-            <p id="info3">Shipping address: </p>
+            <p id="info3" style="color: black">Shipping address: </p>
+            <?php
+                echo "<p style='color: black'>$_REQUEST[stAddress], $_REQUEST[city], $_REQUEST[state] $_REQUEST[zip]</p>";
+            ?>
+            <br />
+            <a href="catalog.php"><button type="button" class="cont">Continue Shopping</button></a>
         </div>
     </body>
     <script>
-        var a = new Date();
-        var b = new Date(a.setTime(a.getTime() + 86400000)).toISOString().split('T')[0];
-        document.getElementById("info2").innerHTML += b;
+        function formatTime (time) {
+                minutes = time.getMinutes();
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+
+                hours = time.getHours();
+
+                amPm = "";
+                if (hours >= 12) {
+                    amPm = "PM";
+                } else {
+                    amPm = "AM";
+                }
+
+                if (hours > 12) {
+                    hours = hours - 12;
+                }
+
+                timeFormatted = hours + ":" + minutes + " " + amPm;
+                return timeFormatted;
+        }
+
+        dateTime = new Date();
+        dateTime.setMinutes(dateTime.getMinutes() + 15);
+        deliveryTime = formatTime(dateTime);
+        deliveryDate = dateTime.toISOString().split('T')[0];
+
+        document.getElementById("info2").innerHTML += deliveryDate + " at " + deliveryTime;
     </script>
 </html>
 <?php

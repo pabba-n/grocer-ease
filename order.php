@@ -128,7 +128,57 @@
         <div class="cardbox2">
                 <h3>3 Order Summary</h3>
                 <?php
-                $sub = (9.5 * $_SESSION["cart"]["Creamy Tomato Soup"]) + (9.75 * $_SESSION["cart"]["Mushroom Lasagna"]);
+
+                $server = "localhost";
+                $userid = "uxzhryenrodc8";
+                $pw = "&227f@#5k1*6";
+                $db= "dbkqyfriigebv4";
+
+                $conn = new mysqli($server, $userid, $pw);
+
+                if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+                }
+
+                $conn->select_db($db);
+
+                $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Creamy Tomato Soup';";
+
+                $result = $conn->query($sql);
+                $tsPrice = 0;
+                if ($result->num_rows > 0) {
+                        while($row = $result->fetch_array()) 
+                        {
+                                $tsPrice = $row[0];
+                        }
+                }
+
+                $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Mushroom Lasagna';";
+
+                $result = $conn->query($sql);
+                $mlPrice = 0;
+                if ($result->num_rows > 0) {
+                        while($row = $result->fetch_array()) 
+                        {
+                                $mlPrice = $row[0];
+                        }
+                }
+
+                $tsQty = $_SESSION["cart"]["Creamy Tomato Soup"];
+                $mlQty = $_SESSION["cart"]["Mushroom Lasagna"];
+
+                if ($tsQty > 0) {
+                        $tsSub = $tsPrice * $tsQty;
+                        echo "<div>Creamy Tomato Soup x $tsQty : $$tsSub</div>";
+                }
+                if ($mlQty > 0) {
+                        $mlSub = $mlPrice * $mlQty;
+                        echo "<div>Mushroom Lasagna x $mlQty : $$mlSub</div>";
+                }
+
+                echo "<hr class='order'>";
+
+                $sub = ($tsPrice * $tsQty) + ($mlPrice * $mlQty);
                 echo "<div>Subtotal: $" . bcdiv($sub,1, 2) . "</div>";
                 echo "<div>Shipping: $0</div><hr class='order'>";
 
@@ -276,14 +326,13 @@
                 function getVals() {
                         errorMessage = "";
                         let valid = true;
-                        // valid &= validateCountry() & validateName() & validatePhone();
-                        // valid &= validateSt() & validateCity() & validateState();
-                        // valid &= validateZip() & validateCard() & validateCardName();
-                        // valid &= validateExp();
+                        valid &= validateCountry() & validateName() & validatePhone();
+                        valid &= validateSt() & validateCity() & validateState();
+                        valid &= validateZip() & validateCard() & validateCardName();
+                        valid &= validateExp();
                         // match with one of us given certain answers
                         if (valid) {
                                 return valid;
-                                //window.location.href="order_summary.php";
                         } else {
                                 alert(errorMessage);
                                 return valid;

@@ -151,10 +151,5 @@
                 }
             }
         ?>
-        <?php 
-            // echo "Tomato Soup: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "<br />";
-            // echo "Mushroom Lasagna: " . $_SESSION["cart"]["Mushroom Lasagna"] . "<br />";
-            // session_destroy();
-        ?>
     </body>
 </html>
