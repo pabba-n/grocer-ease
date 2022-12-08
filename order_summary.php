@@ -16,14 +16,14 @@
     #thankyou {
         font-size: 60px;
         color: #D1843C;
-        padding: 15px;
+        padding: 10px;
         text-align: center;
     }
 
     #info1 {
         font-size: 25px;
         color: #585F67;
-        padding: 15px;
+        padding: 20px;
     }
 
     #info2 {
