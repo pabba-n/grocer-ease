@@ -90,7 +90,7 @@
         <h2>
                 Checkout
         </h2>
-        <form>
+        <form method='get' action='order_summary.php' onSubmit='return getVals()'>
         <div class="cardbox2">
                 <h3>1 Shipping Address</h3>
                 <label for="country">Country/Region</label></br>
@@ -139,7 +139,8 @@
         
         
         <div class="center">
-                <button type="button" onClick="getVals(this.form)">Place Your Order</button>
+                <input type="submit" value='Place Your Order' />
+                <!-- onClick="getVals(this.form)" -->
         </div>
         </form>
         <script>
@@ -272,15 +273,17 @@
                 function getVals() {
                         errorMessage = "";
                         let valid = true;
-                        valid &= validateCountry() & validateName() & validatePhone();
-                        valid &= validateSt() & validateCity() & validateState();
-                        valid &= validateZip() & validateCard() & validateCardName();
-                        valid &= validateExp();
+                        // valid &= validateCountry() & validateName() & validatePhone();
+                        // valid &= validateSt() & validateCity() & validateState();
+                        // valid &= validateZip() & validateCard() & validateCardName();
+                        // valid &= validateExp();
                         // match with one of us given certain answers
                         if (valid) {
-                                window.location.href="order_summary.php";
+                                return valid;
+                                //window.location.href="order_summary.php";
                         } else {
                                 alert(errorMessage);
+                                return valid;
                         }
 
                 }

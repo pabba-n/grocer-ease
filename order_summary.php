@@ -37,24 +37,85 @@
     
     </style>
     <body>
+        <h2>Hello</h2>
         <div class="header">
             <h1 class="logo"><a href="index.html">GROCER-EASE</a></h1>
             <div class="nav-bar">
                     <div><a href="catalog.php">Catalog</a></div>
-                    <div><a href="cart.html">Shopping Cart</a></div>
+                    <div><a href="cart.php">Shopping Cart</a></div>
             </div>
             <hr>
         </div>
         <div class="content">
+            <?php
+                $server = "localhost";
+                $userid = "uxzhryenrodc8";
+                $pw = "&227f@#5k1*6";
+                $db= "dbkqyfriigebv4";
+    
+                $conn = new mysqli($server, $userid, $pw);
+
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                  }
+    
+                $conn->select_db($db);
+
+                // $sql = "SELECT SUM(PRICE) FROM `RECIPE` WHERE RecipeName = 'Creamy Tomato Soup';";
+
+                // $result = $conn->query($sql);
+                // if ($result->num_rows > 0) {
+                //     $counter = 0;
+                //     while($row = $result->fetch_array()) 
+                //     {
+                //         $tsPrice = $row[0];
+                //         echo $tsPrice;
+                //     }
+                // }
+    
+                $serverDate = $_SERVER['REQUEST_TIME'];
+                $orderDate = date('Y-m-d', $serverDate);
+
+                $orderDetails = "";
+
+                foreach ($_SESSION["cart"] as $key => $value) {
+                    if ($value > 0) {
+                        $orderDetails .= $key . ": " . $value . ", ";
+                    }
+                }
+
+                $sub = (9.5 * $_SESSION["cart"]["Creamy Tomato Soup"]) + (9.75 * $_SESSION["cart"]["Mushroom Lasagna"]);
+                $tax = $sub * .0625;
+                $total = $tax + $sub;
+    
+                $orderSql = "INSERT INTO `orders` (`Order_Date`, `Name`, `Phone`, " 
+                            . "`Address`, `City`, `State`, `Zip`, `Order_Details`, "
+                            . "`Total_Cost`) "
+                            . "VALUES ('$orderDate', '$_REQUEST[name]', '$_REQUEST[phone]', "
+                            . "'$_REQUEST[stAddress]', '$_REQUEST[city]', '$_REQUEST[state]', "
+                            . "'$_REQUEST[zip]', $orderDetails, $total)";
+
+                $conn->query($orderSql);
+                $conn->close();
+    
+            ?>
             <img src="check icon.png" width="250">
-            <h2 id="thankyou">Thank you for your order!</h2>
+            <?php
+                $customerName = $_REQUEST['name'];
+                echo "<h2 id='thankyou'>Thank you for your order, $customerName!</h2>";
+            ?>
             <hr id="bar">
             <p id="info1">See your order details below.</p>
             <?php 
-                    echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "</p>";
-                    echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "</p><br />";
+                    if ($_SESSION["cart"]["Creamy Tomato Soup"] > 0) {
+                        echo "<p style='color: black'>Creamy Tomato Soup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Creamy Tomato Soup"] . "</p>";
+                    }
+                    if ($_SESSION["cart"]["Mushroom Lasagna"] > 0) {
+                        echo "<p style='color: black'>Mushroom Lasagna&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qty: " . $_SESSION["cart"]["Mushroom Lasagna"] . "</p><br />";
+                    }
             ?>
             <p id="info2">Estimated Delivery Date: </p>
+            <p id="info3">Shipping address: </p>
         </div>
     </body>
     <script>
