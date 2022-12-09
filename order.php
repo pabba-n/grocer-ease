@@ -337,12 +337,13 @@
                         valid &= validateSt() & validateCity() & validateState();
                         valid &= validateZip() & validateCard() & validateCardName();
                         valid &= validateExp();
+                        console.log(valid);
                         // match with one of us given certain answers
                         if (valid) {
-                                return valid;
+                                return true;
                         } else {
                                 alert(errorMessage);
-                                return valid;
+                                return false;
                         }
 
                 }
