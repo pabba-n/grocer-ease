@@ -56,7 +56,7 @@
         #recipe {
             margin-left: 0;
         }
-        a:hover {
+        #linkButton:hover {
             text-decoration: underline;
         }
     </style>
@@ -89,7 +89,7 @@
             servingSize = recipeArray[0].recipe.yield;
             document.getElementById("recipeYield").innerHTML = "Serves " + servingSize + " people";
             recipeURL = recipeArray[0].recipe.url;
-            document.getElementById("recipeURL").innerHTML = "To get the full recipe, click <a href='" + recipeURL + "' target='_blank'>HERE</a>!";
+            document.getElementById("recipeURL").innerHTML = "To get the full recipe, click <a id='linkButton' href='" + recipeURL + "' target='_blank'>HERE</a>!";
         }
 
         function writeAddToCartButton(recipe) {
